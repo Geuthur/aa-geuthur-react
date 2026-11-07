@@ -1,0 +1,8 @@
+{
+    "extends": "stylelint-config-standard",
+    "ignoreFiles": ["dist/**/*.css"],
+    "rules": {
+        "color-no-hex": true,
+        "no-descending-specificity": null
+    }
+}

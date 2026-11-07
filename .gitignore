@@ -1,0 +1,23 @@
+# Dependencies and build
+node_modules/
+dist/
+*.tsbuildinfo
+*.tgz
+
+# Tests
+coverage/
+coverage.xml
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*.old
+*.cache
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store

@@ -1,0 +1,5 @@
+name: Suggestion Request
+description: What the program should have.
+title: "[SUGGESTION]: "
+labels: ["suggestion"]
+projects: ["aa-geuthur-react"]

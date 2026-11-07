@@ -1,0 +1,150 @@
+# Apply to all files without committing:
+#   pre-commit run --all-files
+# Update this file:
+#   pre-commit autoupdate
+
+default_language_version:
+  # force all unspecified python hooks to run python3
+  python: python3
+  node: 24.18.0 # LTS https://nodejs.org/en/blog/release/
+
+# https://pre-commit.ci/
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: false
+  autoupdate_branch: ''
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: monthly
+  skip:
+    - eslint  # Fails due to missing node environment in CI
+  submodules: false
+
+# https://pre-commit.com/#pre-commit-configyaml---top-level
+exclude: |
+  (?x)(
+    dist/ |
+    LICENSE |
+    package-lock.json
+  )
+
+# pre-commit setup
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      # Identify invalid files
+      - id: check-yaml
+        name: check-yaml (YAML)
+        description: Check for syntax errors in YAML files.
+
+      - id: check-json
+        name: check-json (JSON)
+        description: Check for syntax errors in JSON files.
+        exclude: ^tsconfig.*\.json$  # tsconfig files contain comments
+
+      # git checks
+      - id: check-merge-conflict
+        name: Check for merge conflict strings
+        description: Check for files that contain merge conflict strings.
+
+      - id: check-added-large-files
+        name: Check for large files
+        description: Check for large files that were added to the repository.
+        args:
+          - --maxkb=1000
+
+      - id: detect-private-key
+        name: Detect private key
+        description: Check for private keys in the repository.
+
+      - id: check-case-conflict
+        name: Check for case conflicts
+        description: Check for files with names that differ only in case.
+
+      # General quality checks
+      - id: mixed-line-ending
+        name: Mixed line ending
+        description: Check for mixed line endings.
+        args:
+          - --fix=lf
+
+      - id: trailing-whitespace
+        name: Trailing whitespace
+        description: Check for trailing whitespace.
+        args:
+          - --markdown-linebreak-ext=md
+
+      - id: check-executables-have-shebangs
+        name: Check for shebangs in executables
+        description: Check that executables have shebangs.
+
+      - id: end-of-file-fixer
+        name: End of file fixer
+        description: Ensure that files end with a newline.
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v10.14.0
+    hooks:
+      - id: eslint
+        name: ESLint
+        args: [--fix, --color, --max-warnings, "0"]
+        description: Check for problems in JavaScript and TypeScript files.
+        files: \.(js|mjs|ts|tsx)$
+        additional_dependencies:
+          - eslint@10.11.0
+
+  - repo: https://github.com/thibaudcolas/pre-commit-stylelint
+    rev: v18.0.0-next.0
+    hooks:
+      - id: stylelint
+        name: Stylelint
+        description: Check for problems in CSS files.
+        args:
+          - --formatter=compact
+        additional_dependencies:
+          # stylelint itself needs to be here when using additional_dependencies.
+          - stylelint@17.15.0  # https://github.com/stylelint/stylelint/releases/latest
+          - stylelint-config-standard@40.0.0  # https://github.com/stylelint/stylelint-config-standard/releases/latest
+
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3.11.1
+    hooks:
+      - id: editorconfig-checker
+        name: EditorConfig Checker
+        description: Check for compliance with the definitions in the EditorConfig file.
+        exclude: ^i18n/
+
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 1.0.0
+    hooks:
+      - id: mdformat
+        name: Mdformat
+        description: Format Markdown files.
+        additional_dependencies:
+          - mdformat-gfm==1.0.0  # Mdformat plugin for GitHub Flavored Markdown compatibility » https://github.com/hukkin/mdformat-gfm/tags
+          - mdformat-toc==0.5.0  # Mdformat plugin to generate a table of contents » https://github.com/hukkin/mdformat-toc/tags
+          - mdformat-shfmt==0.2.0  # Mdformat plugin to format shell code blocks » https://github.com/hukkin/mdformat-shfmt/tags
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.39.0
+    hooks:
+      - id: check-github-actions
+        name: Check GitHub Actions
+        description: This hook checks that GitHub Actions files are valid.
+        args:
+          - --verbose
+
+      - id: check-github-workflows
+        name: Check GitHub Workflows
+        description: This hook checks that GitHub Workflows files are valid.
+        args:
+          - --verbose
+
+      - id: check-dependabot
+        name: Check Dependabot
+        description: This hook checks that the Dependabot configuration is valid.
+        args:
+          - --verbose
