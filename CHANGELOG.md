@@ -13,6 +13,13 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [1.0.1] - 2026-11-07
+
+### Fixed
+
+- `renderTooltip` imported `OverlayTrigger` and `Tooltip` through the sub paths `react-bootstrap/OverlayTrigger` and `react-bootstrap/Tooltip`. Node refuses such directory imports, so Vitest in an app could not load the package (`ERR_UNSUPPORTED_DIR_IMPORT`). The built package now imports them from `react-bootstrap` only
+- The ESLint rule config groups third-party stylesheets such as `aa-geuthur-react/styles.css` under `// Styles` instead of `// Third Party`
+
 ## [1.0.0] - 2026-11-07
 
 ### Added
@@ -39,4 +46,5 @@ Section Order:
 <!-- Links -->
 
 [1.0.0]: https://github.com/Geuthur/aa-geuthur-react/releases/tag/v1.0.0 "v1.0.0"
-[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.0...HEAD "In Development"
+[1.0.1]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.0...v1.0.1 "v1.0.1"
+[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.1...HEAD "In Development"

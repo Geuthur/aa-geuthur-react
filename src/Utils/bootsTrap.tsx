@@ -2,8 +2,7 @@
 import type { ComponentProps, ReactElement } from "react";
 
 // Third Party
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 /**
  * Tooltip notification component
