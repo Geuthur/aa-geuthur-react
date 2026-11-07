@@ -44,6 +44,44 @@ describe('AuthLeftMenu', () => {
         expect(settingsLink.getAttribute('href')).toBe(`/${ProjectName}/settings/`);
     });
 
+    it('should highlight only the link of the current page, the root link only on the root page', () => {
+        // Test Data
+        const testData = [
+            { name: 'Overview', link: '/' },
+            { name: 'Settings', link: '/settings/' },
+        ];
+
+        // Test Action
+        render(withProvider(
+            <MemoryRouter initialEntries={[`/${ProjectName}/settings/owners/`]}>
+                <AuthLeftMenu data={testData} isLoading={false} error={false} />
+            </MemoryRouter>
+        ));
+
+        // Expected Result
+        expect(screen.getByText('Settings')).toHaveClass('active');
+        expect(screen.getByText('Overview')).not.toHaveClass('active');
+    });
+
+    it('should highlight the root link on the root page', () => {
+        // Test Data
+        const testData = [
+            { name: 'Overview', link: '/' },
+            { name: 'Settings', link: '/settings/' },
+        ];
+
+        // Test Action
+        render(withProvider(
+            <MemoryRouter initialEntries={[`/${ProjectName}/`]}>
+                <AuthLeftMenu data={testData} isLoading={false} error={false} />
+            </MemoryRouter>
+        ));
+
+        // Expected Result
+        expect(screen.getByText('Overview')).toHaveClass('active');
+        expect(screen.getByText('Settings')).not.toHaveClass('active');
+    });
+
     it('should render external links with standard href', () => {
         // Test Data
         const testData = [

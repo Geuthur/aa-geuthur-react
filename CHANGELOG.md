@@ -11,6 +11,10 @@ Section Order:
 ### Removed
 -->
 
+### Fixed
+
+- A menu link was highlighted when the current path merely ended with its link, so the root link (`/`) of an app was active on every page. `MenuItem` and `AdministrationMenuItem` now highlight the root link only on the root page and every other link on its page and its sub pages (`isActivePath`)
+
 <!-- Your changes go here -->
 
 ## [1.0.1] - 2026-11-07
