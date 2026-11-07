@@ -35,6 +35,13 @@ export const toProjectPath = (projectName: string, link: string) => {
   return cleanLink ? `/${projectName}/${cleanLink}/` : `/${projectName}/`;
 };
 
+/**
+ * Whether a page belongs to a menu link: the root link of the app only on the root page,
+ * every other link on its page and its sub pages (`/example/settings/owners/` highlights `settings/`).
+ */
+export const isActivePath = (pathname: string, target: string, root: string) =>
+  target === root ? pathname === root : pathname.startsWith(target);
+
 // The link names come from the app, so its own namespace is tried after the package namespace.
 const linkNamespaces = [I18N_NAMESPACE, I18N_FALLBACK_NAMESPACE];
 
@@ -42,7 +49,7 @@ const linkNamespaces = [I18N_NAMESPACE, I18N_FALLBACK_NAMESPACE];
 export const AdministrationMenuItem = ({ link, toPath }: { link: MenuLinkItem } & ToPath) => {
   const { t } = useTranslation(I18N_NAMESPACE);
   const path = useLocation();
-  const hit = path.pathname.endsWith(link.link ?? "");
+  const hit = isActivePath(path.pathname, toPath(link.link ?? ""), toPath(""));
 
   return (
     <Nav.Item as="li">
@@ -65,7 +72,7 @@ export const AdministrationMenuItem = ({ link, toPath }: { link: MenuLinkItem } 
 export const MenuItem = ({ link, toPath }: { link: MenuLinkItem } & ToPath) => {
   const { t } = useTranslation(I18N_NAMESPACE);
   const path = useLocation();
-  const hit = path.pathname.endsWith(link.link ?? "");
+  const hit = isActivePath(path.pathname, toPath(link.link ?? ""), toPath(""));
   const label = t(link.name, { ns: linkNamespaces, defaultValue: link.name });
   const isExternal = Boolean(
     link.is_external || link.link?.startsWith("http://") || link.link?.startsWith("https://"),
