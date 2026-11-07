@@ -11,11 +11,13 @@ Section Order:
 ### Removed
 -->
 
+<!-- Your changes go here -->
+
+## [1.0.2] - 2026-11-07
+
 ### Fixed
 
 - A menu link was highlighted when the current path merely ended with its link, so the root link (`/`) of an app was active on every page. `MenuItem` and `AdministrationMenuItem` now highlight the root link only on the root page and every other link on its page and its sub pages (`isActivePath`)
-
-<!-- Your changes go here -->
 
 ## [1.0.1] - 2026-11-07
 
@@ -51,4 +53,5 @@ Section Order:
 
 [1.0.0]: https://github.com/Geuthur/aa-geuthur-react/releases/tag/v1.0.0 "v1.0.0"
 [1.0.1]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.0...v1.0.1 "v1.0.1"
-[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.1...HEAD "In Development"
+[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.2...HEAD "In Development"
+[1.0.2]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.1...v1.0.2 "v1.0.2"
