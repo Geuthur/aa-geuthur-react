@@ -32,7 +32,7 @@ export default defineConfig([
             { heading: '// React', pattern: '^react($|/)|^react-dom($|/)|^react-router' },
 
             // 2. Third Party
-            { heading: '// Third Party', pattern: '^@?\\w' },
+            { heading: '// Third Party', pattern: '^@?\\w(?!.*\\.s?css$)' },
 
             // 3. This package
             { heading: '// AA Geuthur React', pattern: '^@/(?!.*\\.s?css$)' },
