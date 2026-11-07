@@ -1,0 +1,99 @@
+/* ═══ Page container ════════════════════════════════════════════════════════ */
+
+.aa-react.container {
+    min-width: 640px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* ═══ Loader ════════════════════════════════════════════════════════════════ */
+
+@keyframes aa-shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-6px);
+    }
+
+    40% {
+        transform: translateX(6px);
+    }
+
+    60% {
+        transform: translateX(-4px);
+    }
+
+    80% {
+        transform: translateX(4px);
+    }
+}
+
+.aa-shake {
+    animation: aa-shake 320ms ease-in-out infinite;
+}
+
+/* ═══ Menu ══════════════════════════════════════════════════════════════════ */
+
+.aa-menu-badge-pulse {
+    position: relative;
+    box-shadow: 0 0 0 0 rgb(239 68 68 / 70%);
+    animation: aa-menu-badge-ping 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes aa-menu-badge-ping {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgb(239 68 68 / 75%);
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px rgb(239 68 68 / 0%);
+    }
+}
+
+.aa-nav-danger {
+    color: rgb(239 68 68) !important;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.aa-nav-danger:hover {
+    color: rgb(248 113 113) !important;
+    text-shadow: 0 0 8px rgb(239 68 68 / 40%);
+}
+
+.aa-nav-danger.active {
+    color: rgb(255 69 69) !important;
+    border-bottom: 2px solid rgb(239 68 68);
+}
+
+/* ═══ Tooltip ═══════════════════════════════════════════════════════════════ */
+
+.aa-tooltip-container {
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 1rem;
+    border: 1px solid rgb(16 185 129 / 30%);
+    background-color: rgb(30 34 46 / 95%);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-family: "Mono Tech", monospace;
+    font-weight: 600;
+    color: rgb(52 211 153);
+    box-shadow: 0 0 25px rgb(0 0 0 / 60%);
+    backdrop-filter: blur(12px);
+    pointer-events: none;
+}
+
+.aa-tooltip-container span {
+    white-space: nowrap;
+}
+
+.aa-tooltip.tooltip {
+    position: fixed !important;
+    z-index: 9999 !important;
+}
