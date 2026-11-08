@@ -13,6 +13,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [1.2.0] - 2026-11-08
+
 ### Added
 
 - `AuthBase` takes the optional prop `fluidOnSmallScreens`. It drops the minimum width of 640px of the `aa-react container`, so a page fits on a phone narrower than that. Without it the container keeps its width of 640px to 1280px, as before
@@ -66,4 +68,5 @@ Section Order:
 [1.0.1]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.0...v1.0.1 "v1.0.1"
 [1.0.2]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.1...v1.0.2 "v1.0.2"
 [1.1.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.2...v1.1.0 "v1.1.0"
-[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.1.0...HEAD "In Development"
+[1.2.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.1.0...v1.2.0 "v1.2.0"
+[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.2.0...HEAD "In Development"
