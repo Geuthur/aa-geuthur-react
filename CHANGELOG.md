@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- Empty language files for Czech (`cs`) and Slovak (`sk`), created by Weblate; untranslated texts fall back to English
+
 ## [1.3.0] - 2026-11-08
 
 ### Added

@@ -37,7 +37,7 @@ describe("i18nResources", () => {
   it("should bundle every language of i18n/ with the English template", () => {
     // Expected Result
     expect(Object.keys(i18nResources).sort()).toEqual(
-      ["de", "en", "es", "fr-FR", "it-IT", "ja", "ko-KR", "nl-NL", "pl-PL", "ru", "uk", "zh-Hans"].sort(),
+      ["cs", "de", "en", "es", "fr-FR", "it-IT", "ja", "ko-KR", "nl-NL", "pl-PL", "ru", "sk", "uk", "zh-Hans"].sort(),
     );
     expect(i18nResources.en["Close"]).toBe("Close");
     expect(i18nResources.de["Close"]).toBe("");
