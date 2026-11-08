@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Changed
+
+- Language files other than `en` hold real translations only, as Weblate writes them: untranslated texts are no longer empty placeholders but missing, and i18next falls back to `en` through `fallbackLng`. The scanner (`make translations`) maintains only `i18n/en/aa-geuthur-react.json`; the runtime behavior is unchanged, apps need no update
+
 ## [1.3.1] - 2026-11-08
 
 ### Added

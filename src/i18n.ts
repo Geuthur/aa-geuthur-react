@@ -18,8 +18,8 @@ const registeredInstances = new WeakSet<I18n>();
 /**
  * Adds the bundled translations of this package to an initialized i18next instance, once per instance.
  * `AaReactProvider` calls it on mount. Existing texts of the namespace are kept, so an app can
- * override single texts with its own resources. Untranslated texts are empty strings; the app sets
- * `returnEmptyString: false` so they fall back to `fallbackLng`. Does nothing without an
+ * override single texts with its own resources. Untranslated texts are missing from the language
+ * files, so i18next falls back to `fallbackLng` (`en`). Does nothing without an
  * initialized instance (e.g. when `react-i18next` is mocked in a test).
  */
 export function registerI18nResources(i18n: I18n | undefined): void {
