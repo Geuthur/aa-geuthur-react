@@ -17,13 +17,20 @@ export async function loadMenu(projectName: string): Promise<MenuSchema> {
   return data;
 }
 
-/** Loads the current user of the app. */
-export async function loadUserData(projectName: string): Promise<{ user: UserData }> {
+/**
+ * Loads the current user of the app.
+ *
+ * An app whose `user/` endpoint delivers more than the `UserData` contract passes its own type:
+ * `loadUserData<UserData & { is_superuser: boolean }>("example")`.
+ */
+export async function loadUserData<T extends UserData = UserData>(
+  projectName: string,
+): Promise<{ user: T }> {
   const { data, error } = await baseApiClient.GET("/{project}/api/user/", {
     params: { path: { project: projectName } },
   });
   if (error || !data) {
     throw new Error("Failed to load user data");
   }
-  return { user: data };
+  return { user: data as T };
 }

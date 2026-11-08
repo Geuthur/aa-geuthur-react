@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- `useUserData` and `loadUserData` take an optional type parameter (`useUserData<AppUserData>()`) for apps whose `user/` endpoint delivers fields beyond `UserData`. Without it the hook is typed as before
+
 ## [1.0.2] - 2026-11-07
 
 ### Fixed

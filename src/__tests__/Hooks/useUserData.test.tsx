@@ -9,6 +9,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 // AA Geuthur React
 import { withProvider } from "@/__tests__/testUtils";
 import * as ApiCalls from "@/Api/calls";
+import type { UserData } from "@/Api/types";
 import { useUserData } from "@/Hooks/useUserData";
 
 const wrapper = ({ children }: { children: ReactNode }) => {
@@ -33,6 +34,29 @@ describe("useUserData", () => {
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(result.current.data).toEqual(userData);
     expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it("should type app fields beyond the UserData contract", async () => {
+    // Test Data
+    type AppUserData = UserData & { is_superuser: boolean };
+    const user: AppUserData = {
+      user_id: 1,
+      character_id: 42,
+      character_name: "Test Pilot",
+      corporation_id: 7,
+      corporation_name: "Corp",
+      is_admin: true,
+      is_superuser: false,
+    };
+    vi.spyOn(ApiCalls, "loadUserData").mockResolvedValue({ user } as never);
+
+    // Test Action
+    const { result } = renderHook(() => useUserData<AppUserData>(), { wrapper });
+
+    // Expected Result
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    expect(result.current.data?.user.is_superuser).toBe(false);
+    expect(result.current.data?.user.is_admin).toBe(true);
   });
 
   it("should report an error when the request fails", async () => {
