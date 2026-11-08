@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- `AuthBase` takes the optional prop `fluidOnSmallScreens`. It drops the minimum width of 640px of the `aa-react container`, so a page fits on a phone narrower than that. Without it the container keeps its width of 640px to 1280px, as before
+
 ## [1.1.0] - 2026-11-08
 
 ### Added

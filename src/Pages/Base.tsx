@@ -13,6 +13,11 @@ import AuthRightMenuAsync from "@/Menu/AuthRightMenuAsync";
 export interface AuthBaseProps {
   /** Extra classes for the `aa-react container` wrapper. */
   className?: string;
+  /**
+   * Drops the minimum width of 640px, so the page fits on phones narrower than that.
+   * Off by default: the container keeps its 640px to 1280px width.
+   */
+  fluidOnSmallScreens?: boolean;
   /** Content instead of the router `Outlet`. */
   children?: ReactNode;
 }
@@ -21,13 +26,15 @@ export interface AuthBaseProps {
  * Layout of an app page in Alliance Auth: renders the menus into the navigation bar and the
  * routed page inside the `aa-react container` wrapper (640px to 1280px wide) with an error boundary.
  */
-const AuthBase = ({ className = "", children }: AuthBaseProps) => {
+const AuthBase = ({ className = "", fluidOnSmallScreens = false, children }: AuthBaseProps) => {
   return (
     <>
       <AuthLeftMenuAsync />
       <AuthRightMenuAsync />
       <Col>
-        <div className={`aa-react container mt-4 ${className}`}>
+        <div
+          className={`aa-react container mt-4${fluidOnSmallScreens ? " aa-container-fluid-small" : ""} ${className}`}
+        >
           <ErrorBoundary>{children ?? <Outlet />}</ErrorBoundary>
         </div>
       </Col>

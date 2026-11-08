@@ -6,6 +6,11 @@
     margin: 0 auto;
 }
 
+/* Opt-in of AuthBase (`fluidOnSmallScreens`): no minimum width, the container shrinks with the screen. */
+.aa-react.container.aa-container-fluid-small {
+    min-width: 0;
+}
+
 /* ═══ Loader ════════════════════════════════════════════════════════════════ */
 
 @keyframes aa-shake {
