@@ -47,6 +47,28 @@ describe("AuthBase", () => {
     expect(wrapper).toContainElement(screen.getByText("Routed page"));
   });
 
+  it("should keep the minimum width of the container by default and drop it on request", () => {
+    // Test Data
+    vi.spyOn(ApiCalls, "loadMenu").mockResolvedValue({ left_links: [], right_links: [] });
+    const page = (props: { fluidOnSmallScreens?: boolean }) => (
+      <Routes>
+        <Route path={`/${ProjectName}/`} element={<AuthBase {...props} />}>
+          <Route index element={<p>Routed page</p>} />
+        </Route>
+      </Routes>
+    );
+
+    // Test Action
+    const { container, unmount } = renderBase(page({}));
+    const byDefault = container.querySelector(".aa-react.container");
+    unmount();
+    const { container: fluid } = renderBase(page({ fluidOnSmallScreens: true }));
+
+    // Expected Result
+    expect(byDefault).not.toHaveClass("aa-container-fluid-small");
+    expect(fluid.querySelector(".aa-react.container")).toHaveClass("aa-container-fluid-small");
+  });
+
   it("should render the menu links into the navigation of Alliance Auth", async () => {
     // Test Data
     const navLeft = document.createElement("ul");

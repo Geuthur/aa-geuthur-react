@@ -177,7 +177,7 @@ Card header with a title (`name`) and buttons or badges as `children`.
 
 ### Pages<a name="pages"></a>
 
-- `AuthBase`: layout of a page; renders the menus and the routed page (`Outlet`, or `children`) inside the `aa-react container` wrapper (640px to 1280px wide) with an `ErrorBoundary`. `className` adds classes to the wrapper.
+- `AuthBase`: layout of a page; renders the menus and the routed page (`Outlet`, or `children`) inside the `aa-react container` wrapper (640px to 1280px wide) with an `ErrorBoundary`. `className` adds classes to the wrapper. `fluidOnSmallScreens` (optional, off by default) drops the minimum width of 640px so the page fits on phones narrower than that.
 - `ErrorPage`: 404 page.
 
 ## Hooks<a name="hooks"></a>
