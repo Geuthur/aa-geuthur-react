@@ -16,6 +16,7 @@ Section Order:
 ### Added
 
 - Empty language files for Czech (`cs`) and Slovak (`sk`), created by Weblate; untranslated texts fall back to English
+- German translation (`de`) for all texts of the package, translated in Weblate
 
 ## [1.3.0] - 2026-11-08
 

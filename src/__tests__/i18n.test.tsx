@@ -40,36 +40,37 @@ describe("i18nResources", () => {
       ["cs", "de", "en", "es", "fr-FR", "it-IT", "ja", "ko-KR", "nl-NL", "pl-PL", "ru", "sk", "uk", "zh-Hans"].sort(),
     );
     expect(i18nResources.en["Close"]).toBe("Close");
-    expect(i18nResources.de["Close"]).toBe("");
+    expect(i18nResources.es["Close"]).toBe("");
+    expect(i18nResources.de["Close"]).toBe("Schließen");
   });
 });
 
 describe("registerI18nResources", () => {
   it("should register the namespace and fall back to English for an empty text", () => {
     // Test Data
-    const instance = createAppInstance("de");
-    expect(instance.hasResourceBundle("de", I18N_NAMESPACE)).toBe(false);
+    const instance = createAppInstance("es");
+    expect(instance.hasResourceBundle("es", I18N_NAMESPACE)).toBe(false);
 
     // Test Action
     registerI18nResources(instance);
 
     // Expected Result
-    expect(instance.hasResourceBundle("de", I18N_NAMESPACE)).toBe(true);
-    expect(instance.getResource("de", I18N_NAMESPACE, "Close")).toBe("");
+    expect(instance.hasResourceBundle("es", I18N_NAMESPACE)).toBe(true);
+    expect(instance.getResource("es", I18N_NAMESPACE, "Close")).toBe("");
     expect(instance.t("Close", { ns: I18N_NAMESPACE })).toBe("Close");
     expect(instance.t("{{count}} Rows", { ns: I18N_NAMESPACE, count: 3 })).toBe("3 Rows");
   });
 
   it("should keep texts the app provides for the namespace", () => {
     // Test Data
-    const instance = createAppInstance("de", { de: { [I18N_NAMESPACE]: { Close: "Schließen" } } });
+    const instance = createAppInstance("es", { es: { [I18N_NAMESPACE]: { Close: "Cerrar" } } });
 
     // Test Action
     registerI18nResources(instance);
     registerI18nResources(instance);
 
     // Expected Result
-    expect(instance.t("Close", { ns: I18N_NAMESPACE })).toBe("Schließen");
+    expect(instance.t("Close", { ns: I18N_NAMESPACE })).toBe("Cerrar");
     expect(instance.t("Confirm", { ns: I18N_NAMESPACE })).toBe("Confirm");
   });
 
@@ -83,7 +84,7 @@ describe("registerI18nResources", () => {
 describe("AaReactProvider translations", () => {
   it("should show the package texts without a backend when the app only loads its own namespace", () => {
     // Test Data
-    const instance = createAppInstance("de");
+    const instance = createAppInstance("es");
 
     // Test Action
     render(
@@ -96,7 +97,7 @@ describe("AaReactProvider translations", () => {
     );
 
     // Expected Result
-    expect(instance.hasResourceBundle("de", I18N_NAMESPACE)).toBe(true);
+    expect(instance.hasResourceBundle("es", I18N_NAMESPACE)).toBe(true);
     expect(screen.getByText("Loading…")).toBeInTheDocument();
     expect(screen.getByText("Error 404")).toBeInTheDocument();
     expect(screen.getByText("The page you are looking for does not exist.")).toBeInTheDocument();
