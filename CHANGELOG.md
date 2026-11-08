@@ -13,6 +13,15 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- `registerI18nResources(i18n)` adds the bundled translations of the package to an i18next instance, for tests or apps that need the texts outside of `AaReactProvider`
+
+### Changed
+
+- The package brings its translations with it: the files `i18n/<lng>/aa-geuthur-react.json` are bundled at build time and `AaReactProvider` registers them with the i18next instance of the app on mount (`addResourceBundle`, texts the app already holds for the namespace are kept). An app lists only `ns: ["translation"]`, loads nothing for the namespace `aa-geuthur-react` and copies no files into its static directory any more. Set `returnEmptyString: false` in the i18next init of the app so untranslated texts fall back to English. The files stay exported under `aa-geuthur-react/i18n/*` for Weblate
+- Untranslated texts in the language files are empty strings instead of copies of the English text, so Weblate shows them as untranslated and i18next falls back to `en`; `en` stays the template with key equal value. The scanner (`make translations`) writes new keys that way
+
 ## [1.2.0] - 2026-11-08
 
 ### Added

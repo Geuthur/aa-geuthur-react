@@ -1,7 +1,10 @@
 const typescriptTransform = require("i18next-scanner-typescript");
 
-// Every text of the package lives in the namespace `aa-geuthur-react`; the apps copy
-// `i18n/<lng>/aa-geuthur-react.json` next to their own `translation.json`.
+// Every text of the package lives in the namespace `aa-geuthur-react`. The files
+// `i18n/<lng>/aa-geuthur-react.json` are bundled into the package (`src/i18nResources.ts`) and
+// translated in Weblate. `en` is the Weblate template (key equals value); in every other language a
+// new key starts empty, so Weblate shows it as untranslated and i18next falls back to English
+// (the apps set `returnEmptyString: false`).
 module.exports = {
   input: [
     "src/**/*.{js,jsx,ts,tsx}",
@@ -23,7 +26,7 @@ module.exports = {
     defaultLng: "en",
     defaultNs: "aa-geuthur-react",
     defaultValue: function (lng, ns, key) {
-      return key;
+      return lng === "en" ? key : "";
     },
     resource: {
       loadPath: "i18n/{{lng}}/{{ns}}.json",
