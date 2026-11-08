@@ -68,6 +68,7 @@ import { AaReactProvider, AuthBase, ErrorPage } from "aa-geuthur-react";
 
 - `projectName` is the URL prefix of the app (`/example/api/menu/`).
 - `appName` is the name of the package (`aa-example`).
+- `menuRefetchInterval` (optional, milliseconds) lets `useMenu` reload the menu in that interval, so badges stay live. Off by default.
 - `useAaReact()` returns both inside the provider and throws outside of it.
 
 ### Styles<a name="styles"></a>

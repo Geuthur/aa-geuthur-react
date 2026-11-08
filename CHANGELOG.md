@@ -13,9 +13,12 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [1.1.0] - 2026-11-08
+
 ### Added
 
 - `useUserData` and `loadUserData` take an optional type parameter (`useUserData<AppUserData>()`) for apps whose `user/` endpoint delivers fields beyond `UserData`. Without it the hook is typed as before
+- `AaReactProvider` takes the optional prop `menuRefetchInterval` (milliseconds). `useMenu` uses it as `refetchInterval`, so menu badges can stay live. Without it the menu is not reloaded, as before
 
 ## [1.0.2] - 2026-11-07
 
@@ -58,4 +61,5 @@ Section Order:
 [1.0.0]: https://github.com/Geuthur/aa-geuthur-react/releases/tag/v1.0.0 "v1.0.0"
 [1.0.1]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.0...v1.0.1 "v1.0.1"
 [1.0.2]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.1...v1.0.2 "v1.0.2"
-[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.2...HEAD "In Development"
+[1.1.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.0.2...v1.1.0 "v1.1.0"
+[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.1.0...HEAD "In Development"
