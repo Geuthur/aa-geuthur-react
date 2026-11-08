@@ -18,6 +18,7 @@ Section Order:
 ### Added
 
 - `useUserData` and `loadUserData` take an optional type parameter (`useUserData<AppUserData>()`) for apps whose `user/` endpoint delivers fields beyond `UserData`. Without it the hook is typed as before
+- `AaReactProvider` takes the optional prop `menuRefetchInterval` (milliseconds). `useMenu` uses it as `refetchInterval`, so menu badges can stay live. Without it the menu is not reloaded, as before
 
 ## [1.0.2] - 2026-11-07
 
