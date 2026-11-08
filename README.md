@@ -82,19 +82,24 @@ import "@/Styles/index.css";
 
 ### Translations<a name="translations"></a>
 
-Every text of the package lives in the i18next namespace `aa-geuthur-react`. The package ships `i18n/<lng>/aa-geuthur-react.json` for 12 languages (`en`, `de`, `es`, `fr-FR`, `it-IT`, `ja`, `ko-KR`, `nl-NL`, `pl-PL`, `ru`, `uk`, `zh-Hans`). The app copies the file next to its own `translation.json` into the static directory and loads namespaces by name:
+Every text of the package lives in the i18next namespace `aa-geuthur-react` and is bundled into the package. `AaReactProvider` registers the translations with the i18next instance of the app when it mounts (`addResourceBundle`, texts the app already has for the namespace are kept), so the app lists only its own namespace and copies nothing. Untranslated texts are empty strings, so set `returnEmptyString: false` and i18next falls back to English:
 
 ```ts
 i18n.use(Backend).use(initReactI18next).init({
-  ns: ["translation", "aa-geuthur-react"],
+  lng: djangoLanguage,
+  fallbackLng: "en",
+  ns: ["translation"],
   defaultNS: "translation",
+  returnEmptyString: false,
   backend: {
     loadPath: `/static/${ProjectName}/i18n/{{lng}}/{{ns}}.json`,
   },
 });
 ```
 
-The constants `I18N_NAMESPACE` (`aa-geuthur-react`) and `I18N_FALLBACK_NAMESPACE` (`translation`) are exported. Menu link names come from the app, so the menu tries the package namespace first and the namespace of the app second.
+The constants `I18N_NAMESPACE` (`aa-geuthur-react`) and `I18N_FALLBACK_NAMESPACE` (`translation`) are exported. Menu link names come from the app, so the menu tries the package namespace first and the namespace of the app second. `registerI18nResources(i18n)` adds the translations to an instance outside of the provider, e.g. in a test.
+
+The source files `i18n/<lng>/aa-geuthur-react.json` (12 languages: `en`, `de`, `es`, `fr-FR`, `it-IT`, `ja`, `ko-KR`, `nl-NL`, `pl-PL`, `ru`, `uk`, `zh-Hans`) are translated in [Weblate](https://weblate.geuthur.de/projects/allianceauth/aa-geuthur-react/); `en` is the template with key equal value, `make translations` adds new keys empty to every other language. They stay exported as `aa-geuthur-react/i18n/<lng>/aa-geuthur-react.json`.
 
 ### API client<a name="api-client"></a>
 
