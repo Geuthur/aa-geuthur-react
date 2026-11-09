@@ -16,6 +16,7 @@ Section Order:
 ### Changed
 
 - Language files other than `en` hold real translations only, as Weblate writes them: untranslated texts are no longer empty placeholders but missing, and i18next falls back to `en` through `fallbackLng`. The scanner (`make translations`) maintains only `i18n/en/aa-geuthur-react.json`; the runtime behavior is unchanged, apps need no update
+- Development dependencies: `stylelint` 17.16.0 → 18.0.0 and `stylelint-config-standard` 40.0.0 → 41.0.0 (replaces Dependabot PR #1); the existing CSS passes the new rules unchanged, the published package is not affected
 
 ## [1.3.1] - 2026-11-08
 
