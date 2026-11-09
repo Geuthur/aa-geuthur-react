@@ -10,7 +10,7 @@ import { i18nResources } from "@/i18nResources";
 import { ErrorPage } from "@/Pages/404";
 import { AaReactProvider } from "@/Provider";
 
-/** A fresh instance like the apps create it: no backend, empty texts fall back to English. */
+/** A fresh instance like the apps create it: no backend, missing keys fall back to English. */
 const createAppInstance = (lng: string, resources = {}) => {
   const instance = createInstance();
   instance.use(initReactI18next).init({
@@ -40,13 +40,14 @@ describe("i18nResources", () => {
       ["cs", "de", "en", "es", "fr-FR", "it-IT", "ja", "ko-KR", "nl-NL", "pl-PL", "ru", "sk", "uk", "zh-Hans"].sort(),
     );
     expect(i18nResources.en["Close"]).toBe("Close");
-    expect(i18nResources.es["Close"]).toBe("");
+    expect(i18nResources.es["Close"]).toBeUndefined();
+    expect(i18nResources.es).toEqual({});
     expect(i18nResources.de["Close"]).toBe("Schließen");
   });
 });
 
 describe("registerI18nResources", () => {
-  it("should register the namespace and fall back to English for an empty text", () => {
+  it("should register the namespace and fall back to English for a key missing in the language", () => {
     // Test Data
     const instance = createAppInstance("es");
     expect(instance.hasResourceBundle("es", I18N_NAMESPACE)).toBe(false);
@@ -56,9 +57,23 @@ describe("registerI18nResources", () => {
 
     // Expected Result
     expect(instance.hasResourceBundle("es", I18N_NAMESPACE)).toBe(true);
-    expect(instance.getResource("es", I18N_NAMESPACE, "Close")).toBe("");
+    expect(instance.getResource("es", I18N_NAMESPACE, "Close")).toBeUndefined();
     expect(instance.t("Close", { ns: I18N_NAMESPACE })).toBe("Close");
     expect(instance.t("{{count}} Rows", { ns: I18N_NAMESPACE, count: 3 })).toBe("3 Rows");
+  });
+
+  it("should show the German translation and fall back to English for a missing key", () => {
+    // Test Data
+    const de = createAppInstance("de");
+    const ja = createAppInstance("ja");
+
+    // Test Action
+    registerI18nResources(de);
+    registerI18nResources(ja);
+
+    // Expected Result
+    expect(de.t("Close", { ns: I18N_NAMESPACE })).toBe("Schließen");
+    expect(ja.t("Close", { ns: I18N_NAMESPACE })).toBe("Close");
   });
 
   it("should keep texts the app provides for the namespace", () => {
