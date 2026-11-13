@@ -9,3 +9,4 @@ export * from "@/Components/Base/BaseModal/useModalState";
 export * from "@/Components/Base/Loader";
 export { default as BaseSectionHeader } from "@/Components/Base/BaseHeader";
 export type { BaseSectionHeaderProps } from "@/Components/Base/BaseHeader";
+export * from "@/Components/Base/FilterButtonGroup";
