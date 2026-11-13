@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- `FilterButtonGroup` component (button group to pick one filter value, with optional icons and counters), moved from aa-fenrir, exported from the package
+
 ### Changed
 
 - Language files other than `en` hold real translations only, as Weblate writes them: untranslated texts are no longer empty placeholders but missing, and i18next falls back to `en` through `fallbackLng`. The scanner (`make translations`) maintains only `i18n/en/aa-geuthur-react.json`; the runtime behavior is unchanged, apps need no update
