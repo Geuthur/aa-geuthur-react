@@ -13,6 +13,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [1.4.0] - 2026-11-13
+
 ### Added
 
 - `FilterButtonGroup` component (button group to pick one filter value, with optional icons and counters), moved from aa-fenrir, exported from the package
@@ -98,4 +100,5 @@ Section Order:
 [1.2.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.1.0...v1.2.0 "v1.2.0"
 [1.3.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.2.0...v1.3.0 "v1.3.0"
 [1.3.1]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.3.0...v1.3.1 "v1.3.1"
-[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.3.1...HEAD "In Development"
+[1.4.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.3.1...v1.4.0 "v1.4.0"
+[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.4.0...HEAD "In Development"
