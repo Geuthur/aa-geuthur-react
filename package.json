@@ -104,5 +104,10 @@
     "vite": "^8.3.5",
     "vite-plugin-dts": "^5.1.0",
     "vitest": "^5.0.5"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.5"
+    }
   }
 }
