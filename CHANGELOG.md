@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- Development dependencies: `minimatch` 10.2.6 → 11.0.8 (Dependabot alert, DoS via globparts) through `eslint` 10.15.0 and an `overrides` entry for `@typescript-eslint/typescript-estree`; the published package is not affected
+
 ## [1.4.0] - 2026-11-13
 
 ### Added
