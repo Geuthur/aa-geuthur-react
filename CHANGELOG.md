@@ -19,6 +19,7 @@ Section Order:
 - `loadUserSettings`, `updateUserSettings` and the hook `useUserSettings<T, Body>()` with the optimistic update and rollback for the `settings/` endpoint
 - Owner building blocks from the apps: `BaseOwnerSettingsSection`, `BaseOwnerCard`, `MissingOwnerCard`, `OwnerFilterBar` (opt-in `enableFilters`), `UnregisteredModal`, `OwnerPortrait` (`sm`/`md`/`lg`) with global `aa-owner-*` classes, plus `LiveStatusIndicator`, `useLivePing` and `SecurityBadge`; the "Disabled" status badge now uses a readable text colour
 - Shared design tokens (104 `--aa-*`/`--font-*` variables with the theme values for Flatly/Darkly and Bootstrap light/dark), the `aa-status-*` classes and the keyframes `aa-pending-ping`, `aa-pending-glow`, `aa-danger-glow` in `styles.css`; the token selectors use `:where()`, so the rules of an app still win and nothing changes until an app removes its copies
+- Translations from Weblate: German for the new owner, live status and error texts, first translations for `cs`, `es`, `fr-FR`, `it-IT`, `ja`, `ko-KR`, `nl-NL`, `pl-PL`, `ru`, `sk`, `uk` and `zh-Hans`; untranslated texts still fall back to English
 
 ### Fixed
 

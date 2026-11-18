@@ -28,6 +28,13 @@ const createAppInstance = (lng: string, resources = {}) => {
   return instance;
 };
 
+/** A key Weblate has no translation for in the language, so the file does not contain it. */
+const untranslatedKey = (lng: string): string => {
+  const key = Object.keys(i18nResources.en).find((k) => !k.includes("{{count}}") && !(k in i18nResources[lng]));
+  if (!key) throw new Error(`Every key is translated in ${lng}`);
+  return key;
+};
+
 const Loading = () => {
   const { t } = useTranslation(I18N_NAMESPACE);
   return <p>{t("Loading…")}</p>;
@@ -40,8 +47,7 @@ describe("i18nResources", () => {
       ["cs", "de", "en", "es", "fr-FR", "it-IT", "ja", "ko-KR", "nl-NL", "pl-PL", "ru", "sk", "uk", "zh-Hans"].sort(),
     );
     expect(i18nResources.en["Close"]).toBe("Close");
-    expect(i18nResources.es["Close"]).toBeUndefined();
-    expect(i18nResources.es).toEqual({});
+    expect(i18nResources.es[untranslatedKey("es")]).toBeUndefined();
     expect(i18nResources.de["Close"]).toBe("Schließen");
   });
 });
@@ -50,6 +56,7 @@ describe("registerI18nResources", () => {
   it("should register the namespace and fall back to English for a key missing in the language", () => {
     // Test Data
     const instance = createAppInstance("es");
+    const key = untranslatedKey("es");
     expect(instance.hasResourceBundle("es", I18N_NAMESPACE)).toBe(false);
 
     // Test Action
@@ -57,15 +64,18 @@ describe("registerI18nResources", () => {
 
     // Expected Result
     expect(instance.hasResourceBundle("es", I18N_NAMESPACE)).toBe(true);
-    expect(instance.getResource("es", I18N_NAMESPACE, "Close")).toBeUndefined();
-    expect(instance.t("Close", { ns: I18N_NAMESPACE })).toBe("Close");
-    expect(instance.t("{{count}} Rows", { ns: I18N_NAMESPACE, count: 3 })).toBe("3 Rows");
+    expect(instance.getResource("es", I18N_NAMESPACE, key)).toBeUndefined();
+    expect(instance.t(key, { ns: I18N_NAMESPACE })).toBe(i18nResources.en[key]);
+    expect(instance.t("{{count}} Rows", { ns: I18N_NAMESPACE, count: 3 })).toBe(
+      i18nResources.es["{{count}} Rows_other"].replace("{{count}}", "3"),
+    );
   });
 
   it("should show the German translation and fall back to English for a missing key", () => {
     // Test Data
     const de = createAppInstance("de");
     const ja = createAppInstance("ja");
+    const key = untranslatedKey("ja");
 
     // Test Action
     registerI18nResources(de);
@@ -73,20 +83,22 @@ describe("registerI18nResources", () => {
 
     // Expected Result
     expect(de.t("Close", { ns: I18N_NAMESPACE })).toBe("Schließen");
-    expect(ja.t("Close", { ns: I18N_NAMESPACE })).toBe("Close");
+    expect(ja.t(key, { ns: I18N_NAMESPACE })).toBe(i18nResources.en[key]);
   });
 
   it("should keep texts the app provides for the namespace", () => {
     // Test Data
-    const instance = createAppInstance("es", { es: { [I18N_NAMESPACE]: { Close: "Cerrar" } } });
+    const instance = createAppInstance("es", { es: { [I18N_NAMESPACE]: { Close: "Cerrar (app)" } } });
+    const key = untranslatedKey("es");
 
     // Test Action
     registerI18nResources(instance);
     registerI18nResources(instance);
 
     // Expected Result
-    expect(instance.t("Close", { ns: I18N_NAMESPACE })).toBe("Cerrar");
-    expect(instance.t("Confirm", { ns: I18N_NAMESPACE })).toBe("Confirm");
+    expect(instance.t("Close", { ns: I18N_NAMESPACE })).toBe("Cerrar (app)");
+    expect(instance.t("Confirm", { ns: I18N_NAMESPACE })).toBe(i18nResources.es["Confirm"]);
+    expect(instance.t(key, { ns: I18N_NAMESPACE })).toBe(i18nResources.en[key]);
   });
 
   it("should ignore a missing or uninitialized instance", () => {
