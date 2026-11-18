@@ -1,0 +1,204 @@
+/* ═══ Owner settings ════════════════════════════════════════════════════════ */
+
+/*
+ * Global classes of BaseOwnerSettingsSection, BaseOwnerCard, MissingOwnerCard, OwnerFilterBar,
+ * UnregisteredModal and OwnerPortrait (formerly CSS modules in the apps). An app overrides them
+ * with its own rules. Values and fallbacks are those of the former modules.
+ */
+
+.aa-owner-section-title-wrap {
+    color: var(--aa-color-blue, rgb(96 165 250));
+}
+
+.aa-owner-section-title {
+    color: var(--aa-text-title, var(--aa-text-white, rgb(255 255 255)));
+}
+
+.aa-owner-section-count {
+    color: var(--aa-text-muted, rgb(148 163 184));
+    font-family: var(--font-mono, monospace);
+}
+
+.aa-owner-section-description {
+    color: var(--aa-text-light, rgb(203 213 225));
+}
+
+.aa-owner-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* ═══ Owner card ════════════════════════════════════════════════════════════ */
+
+.aa-owner-card {
+    border-radius: var(--aa-border-radius, 12px);
+    border: 1px solid var(--bg-dark-border, var(--aa-border-light, rgb(51 65 85)));
+    background-color: var(--bg-dark-bg, rgb(24 24 27));
+    color: var(--aa-text-primary, rgb(241 245 249));
+    transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.aa-owner-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--aa-border, rgb(71 85 105));
+}
+
+/* Status "token_error" */
+.aa-owner-card-token-error {
+    border-color: var(--aa-color-rose, rgb(244 63 94)) !important;
+    box-shadow: 0 0 12px -2px rgb(244 63 94 / 35%);
+    animation: aa-danger-glow 2.5s infinite ease-in-out;
+}
+
+/* Status "error" */
+.aa-owner-card-error {
+    border-color: var(--aa-color-amber, rgb(245 158 11)) !important;
+    box-shadow: 0 0 12px -2px rgb(245 158 11 / 35%);
+    animation: aa-pending-glow 2.5s infinite ease-in-out;
+}
+
+.aa-owner-card-missing {
+    border-style: dashed;
+    opacity: 0.85;
+}
+
+.aa-owner-card-missing:hover {
+    opacity: 1;
+}
+
+.aa-owner-info {
+    min-width: 0;
+}
+
+.aa-owner-name {
+    color: var(--aa-text-title, var(--aa-text-white, rgb(255 255 255)));
+}
+
+.aa-owner-subtitle {
+    font-size: var(--aa-font-size-xs, 0.75rem);
+    color: var(--aa-text-muted, rgb(148 163 184));
+}
+
+.aa-owner-badge-row {
+    border-top: 1px solid var(--aa-border, rgb(51 65 85));
+}
+
+.aa-owner-last-sync {
+    font-size: var(--aa-font-size-xs, 0.75rem);
+    color: var(--aa-text-muted, rgb(148 163 184));
+}
+
+.aa-owner-error-banner {
+    background-color: rgb(244 63 94 / 10%);
+    border: 1px solid rgb(244 63 94 / 30%);
+    border-radius: var(--aa-border-radius-sm, 6px);
+    color: var(--aa-color-rose-light, rgb(251 113 133));
+    font-size: var(--aa-font-size-xs, 0.75rem);
+}
+
+.aa-owner-error {
+    color: var(--aa-color-rose-light, rgb(251 113 133));
+}
+
+.aa-owner-empty {
+    color: var(--aa-text-muted, rgb(148 163 184));
+}
+
+/* ═══ Status badge ══════════════════════════════════════════════════════════ */
+
+.aa-owner-status-badge {
+    border-radius: 20px;
+    font-size: var(--aa-font-size-xs, 0.75rem);
+}
+
+.aa-owner-status-ok {
+    background-color: rgb(52 211 153 / 15%);
+    color: var(--aa-color-emerald, rgb(52 211 153));
+    border: 1px solid rgb(52 211 153 / 30%);
+}
+
+.aa-owner-status-error {
+    background-color: rgb(245 158 11 / 15%);
+    color: var(--aa-color-amber, rgb(245 158 11));
+    border: 1px solid rgb(245 158 11 / 30%);
+}
+
+.aa-owner-status-token-error {
+    background-color: rgb(244 63 94 / 15%);
+    color: var(--aa-color-rose, rgb(244 63 94));
+    border: 1px solid rgb(244 63 94 / 30%);
+}
+
+.aa-owner-status-disabled {
+    background-color: rgb(100 116 139 / 15%);
+    color: var(--aa-color-grey, rgb(148 163 184));
+    border: 1px solid rgb(100 116 139 / 30%);
+}
+
+.aa-owner-status-incomplete {
+    background-color: rgb(245 158 11 / 10%);
+    color: var(--aa-color-amber, rgb(245 158 11));
+    border: 1px solid rgb(245 158 11 / 20%);
+}
+
+.aa-owner-status-missing {
+    background-color: rgb(148 163 184 / 15%);
+    color: var(--aa-text-muted, rgb(148 163 184));
+    border: 1px solid rgb(148 163 184 / 30%);
+}
+
+/* ═══ Update sections ═══════════════════════════════════════════════════════ */
+
+.aa-owner-sections {
+    background-color: var(--bg-dark-secondary, rgb(15 23 42));
+    border-radius: var(--aa-border-radius-sm, 6px);
+    font-size: var(--aa-font-size-xs, 0.75rem);
+}
+
+.aa-owner-section-item {
+    color: var(--aa-text-muted, rgb(148 163 184));
+}
+
+.aa-owner-section-dot {
+    width: 6px;
+    height: 6px;
+}
+
+.aa-owner-dot-ok {
+    background-color: var(--aa-color-emerald, rgb(52 211 153));
+}
+
+.aa-owner-dot-error {
+    background-color: var(--aa-color-rose, rgb(244 63 94));
+}
+
+.aa-owner-dot-warning {
+    background-color: var(--aa-color-amber, rgb(245 158 11));
+}
+
+.aa-owner-dot-muted {
+    background-color: var(--aa-border, rgb(71 85 105));
+}
+
+/* ═══ Filter bar ════════════════════════════════════════════════════════════ */
+
+.aa-owner-filter-search {
+    flex: 1 1 220px;
+    max-width: 320px;
+}
+
+/* ═══ Owner portrait ════════════════════════════════════════════════════════ */
+
+.aa-owner-portrait-sm {
+    width: 32px;
+    height: 32px;
+}
+
+.aa-owner-portrait-md {
+    width: 40px;
+    height: 40px;
+}
+
+.aa-owner-portrait-lg {
+    width: 48px;
+    height: 48px;
+}
