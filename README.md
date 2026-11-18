@@ -41,7 +41,7 @@ ______________________________________________________________________
 npm install aa-geuthur-react
 ```
 
-The package is built only at build time of the app, the users of the app get the compiled frontend inside the Python package. It ships ESM with type declarations and expects these peer dependencies in the app: `react`, `react-dom`, `react-bootstrap`, `react-router-dom`, `@tanstack/react-query`, `@tanstack/react-table`, `react-i18next`, `i18next`, `lucide-react`, `js-cookie`, `nuqs` and `openapi-fetch`.
+The package is built only at build time of the app, the users of the app get the compiled frontend inside the Python package. It ships ESM with type declarations and expects these peer dependencies in the app: `react`, `react-dom`, `react-bootstrap`, `react-router-dom`, `@tanstack/react-query`, `@tanstack/react-table`, `react-i18next`, `i18next`, `i18next-http-backend`, `lucide-react`, `js-cookie`, `nuqs` and `openapi-fetch`.
 
 ## Setup<a name="setup"></a>
 
@@ -92,19 +92,25 @@ The stylesheet also holds the shared design tokens (`--aa-*`, `--font-hud`, `--f
 
 ### Translations<a name="translations"></a>
 
-Every text of the package lives in the i18next namespace `aa-geuthur-react` and is bundled into the package. `AaReactProvider` registers the translations with the i18next instance of the app when it mounts (`addResourceBundle`, texts the app already has for the namespace are kept), so the app lists only its own namespace and copies nothing. Untranslated texts are missing from the language files, so i18next falls back to English through `fallbackLng`:
+Every text of the package lives in the i18next namespace `aa-geuthur-react` and is bundled into the package. `AaReactProvider` registers the translations with the i18next instance of the app when it mounts (`addResourceBundle`, texts the app already has for the namespace are kept), so the app lists only its own namespace and copies nothing. Untranslated texts are missing from the language files, so i18next falls back to English through `fallbackLng`.
 
-```ts
-i18n.use(Backend).use(initReactI18next).init({
-  lng: djangoLanguage,
-  fallbackLng: "en",
-  ns: ["translation"],
-  defaultNS: "translation",
-  backend: {
-    loadPath: `/static/${ProjectName}/i18n/{{lng}}/{{ns}}.json`,
-  },
-});
+`initI18n(projectName, rootElementId)` initializes i18next for the app. Call it in `Main.tsx` before rendering; finding the container and `createRoot(...).render(...)` stay in the app:
+
+```tsx
+import { initI18n } from "aa-geuthur-react";
+
+initI18n(ProjectName, `${AppName}-root`);
+
+const container = document.getElementById(`${AppName}-root`);
+if (container) {
+  ReactDOM.createRoot(container).render(<Routing />);
+}
 ```
+
+- The language is the `lang` attribute of the root element (Django's `LANGUAGE_CODE`), `en` without the attribute or the element.
+- The texts of the app are loaded with `i18next-http-backend` from `/static/<projectName>/i18n/<lng>/translation.json`.
+- Fixed options: `fallbackLng: "en"`, `ns: ["translation"]`, `defaultNS: "translation"`, `returnEmptyString: false` (Weblate writes empty plural forms for untranslated texts, they fall back to English), `keySeparator: false`, `nsSeparator: false`, `interpolation.escapeValue: false`, `react.useSuspense: false`.
+- It returns the promise of `i18n.init`; rendering does not have to wait for it.
 
 The constants `I18N_NAMESPACE` (`aa-geuthur-react`) and `I18N_FALLBACK_NAMESPACE` (`translation`) are exported. Menu link names come from the app, so the menu tries the package namespace first and the namespace of the app second. `registerI18nResources(i18n)` adds the translations to an instance outside of the provider, e.g. in a test.
 
@@ -121,7 +127,7 @@ import type { paths } from "@/Api/OpenApi";
 export const apiClient = createApiClient<paths>();
 ```
 
-`loadMenu(projectName)` and `loadUserData(projectName)` call the endpoints every app provides (`<project>/api/menu/` and `<project>/api/user/`) and are used by `useMenu` and `useUserData`. `queryKeys` holds the query keys `Menu`, `User` and `UserSettings`.
+`loadMenu(projectName)` and `loadUserData(projectName)` call the endpoints every app provides (`<project>/api/menu/` and `<project>/api/user/`) and are used by `useMenu` and `useUserData`. `loadUserSettings(projectName)` and `updateUserSettings(projectName, settings)` call `GET` and `PUT <project>/api/settings/` of an app with user settings and are used by `useUserSettings`; a failed request throws a fixed text (`Failed to load user settings`, `Failed to update user settings`). `queryKeys` holds the query keys `Menu`, `User` and `UserSettings`.
 
 ### ESLint rule<a name="eslint-rule"></a>
 
@@ -197,6 +203,7 @@ Card header with a title (`name`) and buttons or badges as `children`.
 ## Hooks<a name="hooks"></a>
 
 - `useUserData()`: the current user (`{ user: UserData }`), cached for 5 minutes.
+- `useUserSettings()`: the settings of the current user (`UserSettings`) as query result plus `updateMutation`. `updateMutation.mutate(settings)` shows the new values at once, restores the previous settings when the request fails and stores the answer of the API when it succeeds. An app with more fields passes its types: `useUserSettings<AppSettings>()`, or `useUserSettings<AppSettings, AppSettingsUpdate>()` when `PUT settings/` takes single fields; the sent fields are merged into the loaded settings.
 - `useMenu()`: the menu links (`MenuSchema`), one retry.
 - `useCooldown()`: `{ seconds, start(duration) }`, counts down once per second.
 - `useOwnerCooldowns()`: `{ cooldowns, start(ownerId, duration) }`, one cooldown per owner id.
