@@ -130,7 +130,7 @@
 
 .aa-owner-status-disabled {
     background-color: rgb(100 116 139 / 15%);
-    color: var(--aa-color-grey, rgb(148 163 184));
+    color: var(--aa-text-tertiary, rgb(148 163 184));
     border: 1px solid rgb(100 116 139 / 30%);
 }
 

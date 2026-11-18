@@ -15,7 +15,7 @@ Section Order:
 
 ### Added
 
-- Owner building blocks from the apps: `BaseOwnerSettingsSection`, `BaseOwnerCard`, `MissingOwnerCard`, `OwnerFilterBar` (opt-in `enableFilters`), `UnregisteredModal`, `OwnerPortrait` (`sm`/`md`/`lg`) with global `aa-owner-*` classes, plus `LiveStatusIndicator`, `useLivePing` and `SecurityBadge`
+- Owner building blocks from the apps: `BaseOwnerSettingsSection`, `BaseOwnerCard`, `MissingOwnerCard`, `OwnerFilterBar` (opt-in `enableFilters`), `UnregisteredModal`, `OwnerPortrait` (`sm`/`md`/`lg`) with global `aa-owner-*` classes, plus `LiveStatusIndicator`, `useLivePing` and `SecurityBadge`; the "Disabled" status badge now uses a readable text colour
 - Shared design tokens (104 `--aa-*`/`--font-*` variables with the theme values for Flatly/Darkly and Bootstrap light/dark), the `aa-status-*` classes and the keyframes `aa-pending-ping`, `aa-pending-glow`, `aa-danger-glow` in `styles.css`; the token selectors use `:where()`, so the rules of an app still win and nothing changes until an app removes its copies
 
 ### Fixed
