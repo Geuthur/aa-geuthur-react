@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- Shared design tokens (104 `--aa-*`/`--font-*` variables with the theme values for Flatly/Darkly and Bootstrap light/dark), the `aa-status-*` classes and the keyframes `aa-pending-ping`, `aa-pending-glow`, `aa-danger-glow` in `styles.css`; the token selectors use `:where()`, so the rules of an app still win and nothing changes until an app removes its copies
+
 ### Fixed
 
 - Development dependencies: `minimatch` 10.2.6 → 11.0.8 (Dependabot alert, DoS via globparts) through `eslint` 10.15.0 and an `overrides` entry for `@typescript-eslint/typescript-estree`; the published package is not affected

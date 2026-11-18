@@ -1,6 +1,7 @@
 // Styles
 import "@/Styles/base.css";
 import "@/Styles/table.css";
+import "@/Styles/tokens.css";
 
 export * from "@/Api";
 export * from "@/Components/Base";
