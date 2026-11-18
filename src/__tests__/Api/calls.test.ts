@@ -37,11 +37,23 @@ describe("API calls of the base endpoints", () => {
       });
     });
 
-    it("should throw when the request fails", async () => {
+    it("should throw the message of the API when the request fails", async () => {
       // Test Data
       vi.spyOn(baseApiClient, "GET").mockResolvedValueOnce({
         data: undefined,
         error: { error: "Permission Denied." },
+        response: new Response(),
+      } as never);
+
+      // Test Action & Expected Result
+      await expect(loadMenu("example")).rejects.toThrow("Permission Denied.");
+    });
+
+    it("should throw the fixed text when the answer has no data and no error", async () => {
+      // Test Data
+      vi.spyOn(baseApiClient, "GET").mockResolvedValueOnce({
+        data: undefined,
+        error: undefined,
         response: new Response(),
       } as never);
 
@@ -70,7 +82,7 @@ describe("API calls of the base endpoints", () => {
       });
     });
 
-    it("should throw when the request fails", async () => {
+    it("should throw the fixed text when the API sends no message", async () => {
       // Test Data
       vi.spyOn(baseApiClient, "GET").mockResolvedValueOnce({
         data: undefined,
@@ -103,16 +115,16 @@ describe("API calls of the base endpoints", () => {
       });
     });
 
-    it("should throw the fixed text when the request fails", async () => {
+    it("should throw the message of Django Ninja when the request fails", async () => {
       // Test Data
       vi.spyOn(baseApiClient, "GET").mockResolvedValueOnce({
         data: undefined,
-        error: { error: "Permission Denied." },
+        error: { detail: "Unauthorized" },
         response: new Response(),
       } as never);
 
       // Test Action & Expected Result
-      await expect(loadUserSettings("example")).rejects.toThrow("Failed to load user settings");
+      await expect(loadUserSettings("example")).rejects.toThrow("Unauthorized");
     });
   });
 
@@ -139,11 +151,25 @@ describe("API calls of the base endpoints", () => {
       });
     });
 
-    it("should throw the fixed text when the request fails", async () => {
+    it("should throw the message of the API when the request fails", async () => {
       // Test Data
       vi.spyOn(baseApiClient, "PUT").mockResolvedValueOnce({
         data: undefined,
         error: { error: "Permission Denied." },
+        response: new Response(),
+      } as never);
+
+      // Test Action & Expected Result
+      await expect(updateUserSettings("example", { disable_notifications: true })).rejects.toThrow(
+        "Permission Denied.",
+      );
+    });
+
+    it("should throw the fixed text for a validation error", async () => {
+      // Test Data
+      vi.spyOn(baseApiClient, "PUT").mockResolvedValueOnce({
+        data: undefined,
+        error: { detail: [{ type: "missing", loc: ["body", "settings"], msg: "Field required" }] },
         response: new Response(),
       } as never);
 
