@@ -15,7 +15,7 @@ Section Order:
 
 ### Added
 
-- Shared design tokens (45 `--aa-*`/`--font-*` variables with the theme values for Flatly/Darkly and Bootstrap light/dark), the `aa-status-*` classes and the keyframes `aa-pending-ping`, `aa-pending-glow`, `aa-danger-glow` in `styles.css`; the token selectors use `:where()`, so the rules of an app still win and nothing changes until an app removes its copies
+- Shared design tokens (104 `--aa-*`/`--font-*` variables with the theme values for Flatly/Darkly and Bootstrap light/dark), the `aa-status-*` classes and the keyframes `aa-pending-ping`, `aa-pending-glow`, `aa-danger-glow` in `styles.css`; the token selectors use `:where()`, so the rules of an app still win and nothing changes until an app removes its copies
 
 ### Fixed
 
