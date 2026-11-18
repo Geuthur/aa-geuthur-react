@@ -10,3 +10,6 @@ export * from "@/Components/Base/Loader";
 export { default as BaseSectionHeader } from "@/Components/Base/BaseHeader";
 export type { BaseSectionHeaderProps } from "@/Components/Base/BaseHeader";
 export * from "@/Components/Base/FilterButtonGroup";
+export * from "@/Components/Base/OwnerPortrait";
+export * from "@/Components/Base/OwnerSettings";
+export * from "@/Components/Base/Badges";

@@ -1,5 +1,6 @@
 // Styles
 import "@/Styles/base.css";
+import "@/Styles/owner.css";
 import "@/Styles/table.css";
 import "@/Styles/tokens.css";
 
