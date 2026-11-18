@@ -80,6 +80,16 @@ import "aa-geuthur-react/styles.css";
 import "@/Styles/index.css";
 ```
 
+The stylesheet also holds the shared design tokens (`--aa-*`, `--font-hud`, `--font-mono`) for the dark default and the light and dark themes (`data-theme="flatly"`/`"darkly"`, `data-bs-theme="light"`/`"dark"`), the classes of the status indicator (`aa-status-*`) and the keyframes `aa-pending-ping`, `aa-pending-glow` and `aa-danger-glow`. The token selectors are wrapped in `:where()` and have no specificity, so any `:root` or `html[data-theme=…]` rule of the app overrides a value:
+
+```css
+@import url("aa-geuthur-react/styles.css");
+
+:root {
+    --font-mono: ui-monospace, monospace;
+}
+```
+
 ### Translations<a name="translations"></a>
 
 Every text of the package lives in the i18next namespace `aa-geuthur-react` and is bundled into the package. `AaReactProvider` registers the translations with the i18next instance of the app when it mounts (`addResourceBundle`, texts the app already has for the namespace are kept), so the app lists only its own namespace and copies nothing. Untranslated texts are missing from the language files, so i18next falls back to English through `fallbackLng`:
