@@ -100,15 +100,24 @@ describe("initI18n", () => {
     expect(i18n.t("Settings")).toBe("Einstellungen");
   });
 
-  it("should use English without a lang attribute or without the root element", async () => {
+  it("should use English without a lang attribute", async () => {
     // Test Data
     addRoot("aa-example-root");
 
-    // Test Action & Expected Result
+    // Test Action
     await initI18n("example", "aa-example-root");
-    expect(i18n.language).toBe("en");
 
+    // Expected Result
+    expect(i18n.options.lng).toBe("en");
+    expect(i18n.language).toBe("en");
+  });
+
+  it("should use English without the root element", async () => {
+    // Test Action
     await initI18n("example", "missing-root");
+
+    // Expected Result
+    expect(i18n.options.lng).toBe("en");
     expect(i18n.language).toBe("en");
     expect(i18n.t("Settings")).toBe("Settings");
   });
