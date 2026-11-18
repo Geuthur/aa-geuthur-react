@@ -13,6 +13,7 @@ const peerDependencies = [
   "@tanstack/react-query",
   "@tanstack/react-table",
   "i18next",
+  "i18next-http-backend",
   "js-cookie",
   "lucide-react",
   "nuqs",

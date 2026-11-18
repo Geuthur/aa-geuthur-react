@@ -2,7 +2,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // AA Geuthur React
-import { baseApiClient, loadMenu, loadUserData } from "@/Api/calls";
+import { baseApiClient, loadMenu, loadUserData, loadUserSettings, updateUserSettings } from "@/Api/calls";
 import { queryKeys } from "@/Api/query";
 
 describe("API calls of the base endpoints", () => {
@@ -80,6 +80,77 @@ describe("API calls of the base endpoints", () => {
 
       // Test Action & Expected Result
       await expect(loadUserData("example")).rejects.toThrow("Failed to load user data");
+    });
+  });
+
+  describe("loadUserSettings", () => {
+    it("should request the settings below the project prefix", async () => {
+      // Test Data
+      const settings = { disable_notifications: true };
+      vi.spyOn(baseApiClient, "GET").mockResolvedValueOnce({
+        data: settings,
+        error: undefined,
+        response: new Response(),
+      } as never);
+
+      // Test Action
+      const result = await loadUserSettings("example");
+
+      // Expected Result
+      expect(result).toEqual(settings);
+      expect(baseApiClient.GET).toHaveBeenCalledWith("/{project}/api/settings/", {
+        params: { path: { project: "example" } },
+      });
+    });
+
+    it("should throw the fixed text when the request fails", async () => {
+      // Test Data
+      vi.spyOn(baseApiClient, "GET").mockResolvedValueOnce({
+        data: undefined,
+        error: { error: "Permission Denied." },
+        response: new Response(),
+      } as never);
+
+      // Test Action & Expected Result
+      await expect(loadUserSettings("example")).rejects.toThrow("Failed to load user settings");
+    });
+  });
+
+  describe("updateUserSettings", () => {
+    it("should put the settings below the project prefix and return the saved settings", async () => {
+      // Test Data
+      const saved = { disable_notifications: true, quick_select_presets: [2] };
+      vi.spyOn(baseApiClient, "PUT").mockResolvedValueOnce({
+        data: saved,
+        error: undefined,
+        response: new Response(),
+      } as never);
+
+      // Test Action
+      const result = await updateUserSettings<typeof saved, { quick_select_presets: number[] }>("example", {
+        quick_select_presets: [2],
+      });
+
+      // Expected Result
+      expect(result).toEqual(saved);
+      expect(baseApiClient.PUT).toHaveBeenCalledWith("/{project}/api/settings/", {
+        params: { path: { project: "example" } },
+        body: { quick_select_presets: [2] },
+      });
+    });
+
+    it("should throw the fixed text when the request fails", async () => {
+      // Test Data
+      vi.spyOn(baseApiClient, "PUT").mockResolvedValueOnce({
+        data: undefined,
+        error: { error: "Permission Denied." },
+        response: new Response(),
+      } as never);
+
+      // Test Action & Expected Result
+      await expect(updateUserSettings("example", { disable_notifications: true })).rejects.toThrow(
+        "Failed to update user settings",
+      );
     });
   });
 });

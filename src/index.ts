@@ -8,6 +8,7 @@ export * from "@/Api";
 export * from "@/Components/Base";
 export * from "@/Hooks";
 export * from "@/i18n";
+export * from "@/i18nInit";
 export * from "@/Menu";
 export * from "@/Pages";
 export * from "@/Provider";
