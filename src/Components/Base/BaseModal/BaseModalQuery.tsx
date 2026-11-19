@@ -3,11 +3,24 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { QueryKey } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 
+// AA Geuthur React
+import { apiErrorMessage } from '@/Api/errors';
+
 type FormData = Record<string, string | boolean>;
 
 function buildHeaders(): Record<string, string> {
     const csrf = Cookies.get('csrftoken');
     return csrf ? { 'X-CSRFToken': csrf } : {};
+}
+
+/**
+ * Message of a failed answer: `error` or `detail` of the API, otherwise `message` of older answers
+ * and views outside the API, otherwise a fixed text.
+ */
+function failureMessage(data: unknown): string {
+    const message = (data as { message?: unknown } | null)?.message;
+    const fallback = typeof message === 'string' && message.trim() !== '' ? message : 'Unknown error';
+    return apiErrorMessage(data, fallback);
 }
 
 /** Mutation für Delete / Update / Bestätigungen (ohne Body) */
@@ -25,7 +38,7 @@ export function useApproveMutation(queryKey?: QueryKey | QueryKey[]) {
             const data = await response.json();
 
             if (!response.ok || data.success !== true) {
-                throw new Error(data.message ?? 'Unknown error');
+                throw new Error(failureMessage(data));
             }
             return data;
         },
@@ -73,7 +86,7 @@ export function useFormApproveMutation(queryKey?: QueryKey | QueryKey[]) {
             const data = await response.json();
 
             if (!response.ok || data.success !== true) {
-                throw new Error(data.message ?? 'Unknown error');
+                throw new Error(failureMessage(data));
             }
             return data;
         },
