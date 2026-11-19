@@ -13,6 +13,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [1.5.0] - 2026-11-19
+
 ### Added
 
 - `initI18n(projectName, rootElementId)` replaces the i18next block in `Main.tsx` of the apps (fixed options including `returnEmptyString: false`, language from the `lang` attribute of the root element); `i18next-http-backend` is a new peer dependency
@@ -114,4 +116,5 @@ Section Order:
 [1.3.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.2.0...v1.3.0 "v1.3.0"
 [1.3.1]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.3.0...v1.3.1 "v1.3.1"
 [1.4.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.3.1...v1.4.0 "v1.4.0"
-[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.4.0...HEAD "In Development"
+[1.5.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.4.0...v1.5.0 "v1.5.0"
+[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.5.0...HEAD "In Development"
