@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- `useApproveMutation` and `useFormApproveMutation` throw the `error` of the API (otherwise `detail`, otherwise `message`) instead of "Unknown error" for answers in the unified error format
+
 ## [1.5.0] - 2026-11-19
 
 ### Added
