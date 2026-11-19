@@ -127,7 +127,7 @@ import type { paths } from "@/Api/OpenApi";
 export const apiClient = createApiClient<paths>();
 ```
 
-`loadMenu(projectName)` and `loadUserData(projectName)` call the endpoints every app provides (`<project>/api/menu/` and `<project>/api/user/`) and are used by `useMenu` and `useUserData`. `loadUserSettings(projectName)` and `updateUserSettings(projectName, settings)` call `GET` and `PUT <project>/api/settings/` of an app with user settings and are used by `useUserSettings`; a failed request throws a fixed text (`Failed to load user settings`, `Failed to update user settings`). `queryKeys` holds the query keys `Menu`, `User` and `UserSettings`.
+`loadMenu(projectName)` and `loadUserData(projectName)` call the endpoints every app provides (`<project>/api/menu/` and `<project>/api/user/`) and are used by `useMenu` and `useUserData`. `loadUserSettings(projectName)` and `updateUserSettings(projectName, settings)` call `GET` and `PUT <project>/api/settings/` of an app with user settings and are used by `useUserSettings`. `apiErrorMessage(error, fallback)` returns the message the API sent with a failed request: the string below `error` (`ErrorSchema` of the apps), otherwise the string below `detail` (Django Ninja), otherwise `fallback`. The four calls use it, so a failed request throws the message of the API and only without one the fixed text (`Failed to load menu`, `Failed to load user data`, `Failed to load user settings`, `Failed to update user settings`). Apps use it the same way: `throw new Error(apiErrorMessage(error, "Failed to load items"))`. `queryKeys` holds the query keys `Menu`, `User` and `UserSettings`.
 
 ### ESLint rule<a name="eslint-rule"></a>
 

@@ -1,6 +1,7 @@
 // AA Geuthur React
 import { createApiClient } from "@/Api/Api";
 import type { BasePaths } from "@/Api/basePaths";
+import { apiErrorMessage } from "@/Api/errors";
 import type { MenuSchema, UserData, UserSettings, UserSettingsUpdateRequest } from "@/Api/types";
 
 /** Client for the endpoints every app provides (`menu/`, `user/`) and the optional `settings/`. */
@@ -12,7 +13,7 @@ export async function loadMenu(projectName: string): Promise<MenuSchema> {
     params: { path: { project: projectName } },
   });
   if (error || !data) {
-    throw new Error("Failed to load menu");
+    throw new Error(apiErrorMessage(error, "Failed to load menu"));
   }
   return data;
 }
@@ -30,7 +31,7 @@ export async function loadUserData<T extends UserData = UserData>(
     params: { path: { project: projectName } },
   });
   if (error || !data) {
-    throw new Error("Failed to load user data");
+    throw new Error(apiErrorMessage(error, "Failed to load user data"));
   }
   return { user: data as T };
 }
@@ -46,7 +47,7 @@ export async function loadUserSettings<T extends UserSettings = UserSettings>(pr
     params: { path: { project: projectName } },
   });
   if (error || !data) {
-    throw new Error("Failed to load user settings");
+    throw new Error(apiErrorMessage(error, "Failed to load user settings"));
   }
   return data as T;
 }
@@ -66,7 +67,7 @@ export async function updateUserSettings<T extends UserSettings = UserSettings, 
     body: settings as unknown as UserSettingsUpdateRequest,
   });
   if (error || !data) {
-    throw new Error("Failed to update user settings");
+    throw new Error(apiErrorMessage(error, "Failed to update user settings"));
   }
   return data as T;
 }

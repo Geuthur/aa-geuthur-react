@@ -16,6 +16,7 @@ Section Order:
 ### Added
 
 - `initI18n(projectName, rootElementId)` replaces the i18next block in `Main.tsx` of the apps (fixed options including `returnEmptyString: false`, language from the `lang` attribute of the root element); `i18next-http-backend` is a new peer dependency
+- `apiErrorMessage(error, fallback)` returns the message of the API for a failed request (`error`, otherwise a string below `detail`, otherwise the fallback); `loadMenu`, `loadUserData`, `loadUserSettings` and `updateUserSettings` throw it instead of only their fixed text
 - `loadUserSettings`, `updateUserSettings` and the hook `useUserSettings<T, Body>()` with the optimistic update and rollback for the `settings/` endpoint
 - Owner building blocks from the apps: `BaseOwnerSettingsSection`, `BaseOwnerCard`, `MissingOwnerCard`, `OwnerFilterBar` (opt-in `enableFilters`), `UnregisteredModal`, `OwnerPortrait` (`sm`/`md`/`lg`) with global `aa-owner-*` classes, plus `LiveStatusIndicator`, `useLivePing` and `SecurityBadge`; the "Disabled" status badge now uses a readable text colour
 - Shared design tokens (104 `--aa-*`/`--font-*` variables with the theme values for Flatly/Darkly and Bootstrap light/dark), the `aa-status-*` classes and the keyframes `aa-pending-ping`, `aa-pending-glow`, `aa-danger-glow` in `styles.css`; the token selectors use `:where()`, so the rules of an app still win and nothing changes until an app removes its copies
