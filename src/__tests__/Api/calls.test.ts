@@ -1,5 +1,5 @@
 // Third Party
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, expectTypeOf, it, vi } from "vitest";
 
 // AA Geuthur React
 import { baseApiClient, loadMenu, loadUserData, loadUserSettings, updateUserSettings } from "@/Api/calls";
@@ -35,6 +35,29 @@ describe("API calls of the base endpoints", () => {
       expect(baseApiClient.GET).toHaveBeenCalledWith("/{project}/api/menu/", {
         params: { path: { project: "example" } },
       });
+    });
+
+    it("should return the modals of the menu when the app sends them", async () => {
+      // Test Data
+      const menu = {
+        left_links: [],
+        right_links: [],
+        modals: { create_session: { modal_id: "create-session", url: "/beltradar/api/session/create/" } },
+      };
+      vi.spyOn(baseApiClient, "GET").mockResolvedValueOnce({
+        data: menu,
+        error: undefined,
+        response: new Response(),
+      } as never);
+
+      // Test Action
+      const result = await loadMenu<{ create_session?: { modal_id: string; url: string } | null }>("beltradar");
+
+      // Expected Result
+      expect(result.modals?.create_session).toEqual(menu.modals.create_session);
+      expectTypeOf(result.modals).toEqualTypeOf<
+        { create_session?: { modal_id: string; url: string } | null } | null | undefined
+      >();
     });
 
     it("should throw the message of the API when the request fails", async () => {

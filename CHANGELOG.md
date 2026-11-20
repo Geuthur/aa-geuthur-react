@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- `MenuSchema` has the optional field `modals` (also `null`); apps with their own `MenuModalSchema` pass its type to `useMenu<T>()` and `loadMenu<T>()`, apps without menu modals change nothing
+
 ### Fixed
 
 - `useApproveMutation` and `useFormApproveMutation` throw the `error` of the API (otherwise `detail`, otherwise `message`) instead of "Unknown error" for answers in the unified error format

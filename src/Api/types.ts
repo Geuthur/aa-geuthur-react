@@ -12,10 +12,22 @@ export interface MenuLink {
   has_errors?: boolean;
 }
 
-/** The menu of the app: links left and right of the navigation bar. */
-export interface MenuSchema {
+/**
+ * Modals the menu offers, keyed by the app (e.g. `create_example`, `create_session`).
+ * Each app has its own keys and may deliver its own modal shape, so this default stays open.
+ */
+export type MenuModals = Record<string, ModalSchema | null | undefined>;
+
+/**
+ * The menu of the app: links left and right of the navigation bar and, for apps that send them, its modals.
+ *
+ * An app with its own `MenuModalSchema` passes it as type: `MenuSchema<{ create_session?: AppModal | null }>`.
+ */
+export interface MenuSchema<TModals extends object = MenuModals> {
   left_links: MenuLink[];
   right_links: MenuLink[];
+  /** Modals of the menu (`MenuModalSchema` of the app); missing or `null` for apps without menu modals. */
+  modals?: TModals | null;
 }
 
 /** The current user as delivered by the `user/` endpoint of the app. */
