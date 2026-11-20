@@ -13,6 +13,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [1.6.0] - 2026-11-20
+
 ### Added
 
 - `MenuSchema` has the optional field `modals` (also `null`); apps with their own `MenuModalSchema` pass its type to `useMenu<T>()` and `loadMenu<T>()`, apps without menu modals change nothing
@@ -20,6 +22,10 @@ Section Order:
 ### Fixed
 
 - `useApproveMutation` and `useFormApproveMutation` throw the `error` of the API (otherwise `detail`, otherwise `message`) instead of "Unknown error" for answers in the unified error format
+
+### Changed
+
+- Translations from Weblate: the English prefill of the "unregistered" plural texts is removed from the language files (they fall back to English as before), one German text uses the informal address
 
 ## [1.5.0] - 2026-11-19
 
@@ -125,4 +131,5 @@ Section Order:
 [1.3.1]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.3.0...v1.3.1 "v1.3.1"
 [1.4.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.3.1...v1.4.0 "v1.4.0"
 [1.5.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.4.0...v1.5.0 "v1.5.0"
-[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.5.0...HEAD "In Development"
+[1.6.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.5.0...v1.6.0 "v1.6.0"
+[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.6.0...HEAD "In Development"
