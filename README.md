@@ -71,6 +71,17 @@ import { AaReactProvider, AuthBase, ErrorPage } from "aa-geuthur-react";
 - `menuRefetchInterval` (optional, milliseconds) lets `useMenu` reload the menu in that interval, so badges stay live. Off by default.
 - `useAaReact()` returns both inside the provider and throws outside of it.
 
+Create the `QueryClient` with `createQueryClient()` instead of `new QueryClient()`:
+
+```tsx
+import { createQueryClient } from "aa-geuthur-react";
+
+const queryClient = createQueryClient();
+```
+
+- Queries are retried only after a network error (`TypeError` of `fetch`), at most three times. Every answer of the server (4xx and 5xx) is shown at once; the rule is exported as `shouldRetryQuery(failureCount, error)`.
+- Own options are merged and win: `createQueryClient({ defaultOptions: { queries: { staleTime: 60000 } } })`. Mutations keep the defaults of react-query.
+
 ### Styles<a name="styles"></a>
 
 The components use Bootstrap utilities and a few global classes (`aa-table-*`, `aa-react.container`, `aa-shake`, `aa-menu-badge-pulse`, `aa-nav-danger`, `aa-tooltip`). Import the stylesheet once, before the stylesheet of the app so the app can override it:
