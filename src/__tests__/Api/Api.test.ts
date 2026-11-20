@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 // AA Geuthur React
 import { createApiClient } from "@/Api/Api";
+import { ServiceUnavailableError } from "@/Api/errors";
 
 interface paths {
   "/example/api/ping/": {
@@ -52,5 +53,38 @@ describe("createApiClient", () => {
     // Expected Result
     const request = fetchSpy.mock.calls[0][0] as Request;
     expect(request.headers.get("X-CSRFToken")).toBeNull();
+  });
+
+  it.each([502, 503, 504])("should reject the request with ServiceUnavailableError for %i", async (status) => {
+    // Test Data
+    vi.spyOn(Cookies, "get").mockReturnValue(undefined as never);
+    const fetchSpy = vi.fn().mockResolvedValue(new Response("Bad Gateway", { status }));
+    const client = createApiClient<paths>({ baseUrl: "http://localhost", fetch: fetchSpy });
+
+    // Test Action
+    const result = client.GET("/example/api/ping/");
+
+    // Expected Result
+    await expect(result).rejects.toBeInstanceOf(ServiceUnavailableError);
+    await expect(result).rejects.toMatchObject({ status });
+  });
+
+  it.each([200, 403, 404, 500])("should resolve the request for %i", async (status) => {
+    // Test Data
+    vi.spyOn(Cookies, "get").mockReturnValue(undefined as never);
+    const body = status === 200 ? { ok: true } : { error: "Failed" };
+    const fetchSpy = vi
+      .fn()
+      .mockResolvedValue(
+        new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } }),
+      );
+    const client = createApiClient<paths>({ baseUrl: "http://localhost", fetch: fetchSpy });
+
+    // Test Action
+    const { data, error, response } = await client.GET("/example/api/ping/");
+
+    // Expected Result
+    expect(response.status).toBe(status);
+    expect(status === 200 ? data : error).toEqual(body);
   });
 });

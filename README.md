@@ -79,7 +79,8 @@ import { createQueryClient } from "aa-geuthur-react";
 const queryClient = createQueryClient();
 ```
 
-- Queries are retried only after a network error (`TypeError` of `fetch`), at most three times. Every answer of the server (4xx and 5xx) is shown at once; the rule is exported as `shouldRetryQuery(failureCount, error)`.
+- Queries are retried only after a network error (`TypeError` of `fetch`) or a short outage of the server (502, 503 or 504, thrown by the client of `createApiClient` as `ServiceUnavailableError`), at most three times. Every other answer of the server (4xx and 500) is shown at once; the rule is exported as `shouldRetryQuery(failureCount, error)`.
+- For 502, 503 and 504 queries and mutations show the fixed message of `ServiceUnavailableError` instead of `apiErrorMessage`.
 - Own options are merged and win: `createQueryClient({ defaultOptions: { queries: { staleTime: 60000 } } })`. Mutations keep the defaults of react-query.
 
 ### Styles<a name="styles"></a>
