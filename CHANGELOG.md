@@ -17,7 +17,7 @@ Section Order:
 
 ### Added
 
-- `createQueryClient()` and `shouldRetryQuery()`: queries retry only network errors, answers of the server (4xx and 5xx) are shown at once
+- `createQueryClient()` and `shouldRetryQuery()`: queries retry only network errors and 502, 503 or 504 (`ServiceUnavailableError` from the client of `createApiClient`), other answers of the server (4xx and 500) are shown at once
 
 ## [1.6.0] - 2026-11-20
 

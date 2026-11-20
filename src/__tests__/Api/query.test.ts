@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 
 // AA Geuthur React
+import { ServiceUnavailableError } from "@/Api/errors";
 import { createQueryClient, QUERY_NETWORK_RETRIES, shouldRetryQuery } from "@/Api/query";
 
 describe("shouldRetryQuery", () => {
@@ -11,6 +12,16 @@ describe("shouldRetryQuery", () => {
       expect(shouldRetryQuery(count, error)).toBe(true);
     }
     expect(shouldRetryQuery(QUERY_NETWORK_RETRIES, error)).toBe(false);
+  });
+
+  it("retries short outages of the server up to the limit", () => {
+    for (const status of [502, 503, 504]) {
+      const error = new ServiceUnavailableError(status);
+      for (let count = 0; count < QUERY_NETWORK_RETRIES; count++) {
+        expect(shouldRetryQuery(count, error)).toBe(true);
+      }
+      expect(shouldRetryQuery(QUERY_NETWORK_RETRIES, error)).toBe(false);
+    }
   });
 
   it("does not retry answers of the server", () => {
@@ -74,6 +85,21 @@ describe("createQueryClient", () => {
         },
       }),
     ).rejects.toThrow("Failed to fetch");
+    expect(calls).toBe(QUERY_NETWORK_RETRIES + 1);
+  });
+
+  it("retries a short outage of the server", async () => {
+    const client = createQueryClient({ defaultOptions: { queries: { retryDelay: 0 } } });
+    let calls = 0;
+    await expect(
+      client.fetchQuery({
+        queryKey: ["outage"],
+        queryFn: () => {
+          calls++;
+          throw new ServiceUnavailableError(503);
+        },
+      }),
+    ).rejects.toBeInstanceOf(ServiceUnavailableError);
     expect(calls).toBe(QUERY_NETWORK_RETRIES + 1);
   });
 });
