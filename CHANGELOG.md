@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- `createQueryClient()` and `shouldRetryQuery()`: queries retry only network errors, answers of the server (4xx and 5xx) are shown at once
+
 ## [1.6.0] - 2026-11-20
 
 ### Added
