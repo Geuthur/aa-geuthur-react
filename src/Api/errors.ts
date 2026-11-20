@@ -19,3 +19,22 @@ export function apiErrorMessage(error: unknown, fallback: string): string {
   }
   return fallback;
 }
+
+/** Status codes of a short outage of the server, e.g. while Django restarts behind nginx. */
+export const SERVICE_UNAVAILABLE_STATUSES = [502, 503, 504] as const;
+
+/**
+ * Thrown by the client of `createApiClient` for an answer with status 502, 503 or 504.
+ *
+ * The request does not resolve with `error` but is rejected, so `shouldRetryQuery` can retry
+ * the query like a network error. Queries and mutations show the fixed message of this error.
+ */
+export class ServiceUnavailableError extends Error {
+  readonly status: number;
+
+  constructor(status: number) {
+    super(`The server is temporarily unavailable (${status})`);
+    this.name = "ServiceUnavailableError";
+    this.status = status;
+  }
+}
