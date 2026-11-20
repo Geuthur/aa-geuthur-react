@@ -2,20 +2,26 @@
 import { createApiClient } from "@/Api/Api";
 import type { BasePaths } from "@/Api/basePaths";
 import { apiErrorMessage } from "@/Api/errors";
-import type { MenuSchema, UserData, UserSettings, UserSettingsUpdateRequest } from "@/Api/types";
+import type { MenuModals, MenuSchema, UserData, UserSettings, UserSettingsUpdateRequest } from "@/Api/types";
 
 /** Client for the endpoints every app provides (`menu/`, `user/`) and the optional `settings/`. */
 export const baseApiClient = createApiClient<BasePaths>();
 
-/** Loads the menu links of the app. */
-export async function loadMenu(projectName: string): Promise<MenuSchema> {
+/**
+ * Loads the menu links and, if the app sends them, the menu modals.
+ *
+ * An app with its own menu modals passes their type: `loadMenu<{ create_session?: AppModal | null }>("beltradar")`.
+ */
+export async function loadMenu<TModals extends object = MenuModals>(
+  projectName: string,
+): Promise<MenuSchema<TModals>> {
   const { data, error } = await baseApiClient.GET("/{project}/api/menu/", {
     params: { path: { project: projectName } },
   });
   if (error || !data) {
     throw new Error(apiErrorMessage(error, "Failed to load menu"));
   }
-  return data;
+  return data as MenuSchema<TModals>;
 }
 
 /**
