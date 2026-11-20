@@ -13,6 +13,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [1.7.0] - 2026-11-20
+
 ### Added
 
 - `createQueryClient()` and `shouldRetryQuery()`: queries retry only network errors and 502, 503 or 504 (`ServiceUnavailableError` from the client of `createApiClient`), other answers of the server (4xx and 500) are shown at once
@@ -136,4 +138,5 @@ Section Order:
 [1.4.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.3.1...v1.4.0 "v1.4.0"
 [1.5.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.4.0...v1.5.0 "v1.5.0"
 [1.6.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.5.0...v1.6.0 "v1.6.0"
-[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.6.0...HEAD "In Development"
+[1.7.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.6.0...v1.7.0 "v1.7.0"
+[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.7.0...HEAD "In Development"
