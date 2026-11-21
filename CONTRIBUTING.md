@@ -74,7 +74,7 @@ contained in `CODE_OF_CONDUCT.md` so the project maintainers can address the iss
 
 ### Environment<a name="environment"></a>
 
-Node.js 24 (LTS) and npm are enough. Install the dependencies with `npm ci` and the pre-commit hooks with `pre-commit install` if you have [pre-commit] available.
+Node.js 26 (LTS) and npm are enough. Install the dependencies with `npm ci` and the pre-commit hooks with `pre-commit install` if you have [pre-commit] available.
 
 ### Makefile System<a name="makefile-system"></a>
 
