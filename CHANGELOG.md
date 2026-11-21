@@ -13,6 +13,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [1.8.0] - 2026-11-21
+
 ### Changed
 
 - Node 26 (LTS) for CI and pre-commit, updated npm packages; the peer ranges also allow `i18next` 27 and `react-i18next` 18
@@ -143,4 +145,5 @@ Section Order:
 [1.5.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.4.0...v1.5.0 "v1.5.0"
 [1.6.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.5.0...v1.6.0 "v1.6.0"
 [1.7.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.6.0...v1.7.0 "v1.7.0"
-[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.7.0...HEAD "In Development"
+[1.8.0]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.7.0...v1.8.0 "v1.8.0"
+[in development]: https://github.com/Geuthur/aa-geuthur-react/compare/v1.8.0...HEAD "In Development"
