@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Changed
+
+- Node 26 (LTS) for CI and pre-commit, updated npm packages; the peer ranges also allow `i18next` 27 and `react-i18next` 18
+
 ## [1.7.0] - 2026-11-20
 
 ### Added

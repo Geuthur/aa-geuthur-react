@@ -56,7 +56,7 @@
   "peerDependencies": {
     "@tanstack/react-query": "^5.105.0",
     "@tanstack/react-table": "^9.3.1",
-    "i18next": "^26.5.11",
+    "i18next": "^26.5.11 || ^27.0.0",
     "i18next-http-backend": "^4.0.6",
     "js-cookie": "^3.0.8",
     "lucide-react": "^1.64.0",
@@ -65,7 +65,7 @@
     "react": "^19.3.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.3.1",
-    "react-i18next": "^17.1.9",
+    "react-i18next": "^17.1.9 || ^18.0.0",
     "react-router-dom": "^7.18.5"
   },
   "devDependencies": {
@@ -85,7 +85,7 @@
     "eslint": "^10.13.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.13.0",
-    "i18next": "^26.5.11",
+    "i18next": "^27.2.3",
     "i18next-http-backend": "^4.0.6",
     "i18next-scanner": "^4.6.0",
     "i18next-scanner-typescript": "^1.2.1",
@@ -97,7 +97,7 @@
     "react": "^19.3.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.3.1",
-    "react-i18next": "^17.1.9",
+    "react-i18next": "^18.0.3",
     "react-router-dom": "^7.18.5",
     "stylelint": "^18.0.0",
     "stylelint-config-standard": "^41.0.0",
