@@ -13,6 +13,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- stylelint pre-commit hook works with stylelint 18 without `node_modules` in the repository
+
 ## [1.8.0] - 2026-11-21
 
 ### Changed
