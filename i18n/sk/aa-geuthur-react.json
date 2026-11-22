@@ -11,7 +11,7 @@
   "Next Page": "Nasledujúca stránka",
   "Last Page": "Posledná stránka",
   "{{count}} Rows_one": "{{count}} riadok",
-  "{{count}} Rows_few": "",
+  "{{count}} Rows_few": "{{count}} riadky",
   "{{count}} Rows_other": "{{count}} riadkov",
   "Clear": "Vymazať",
   "Reset": "Obnoviť",
