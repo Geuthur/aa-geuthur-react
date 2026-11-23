@@ -25,5 +25,5 @@
   "Refreshing Data": "Gegevens vernieuwen",
   "Data Loaded: {{date}}": "Gegevens geladen: {{date}}",
   "Export Table to CSV": "Tabel exporteren naar CSV",
-  "Alliance": "Alliantie"
+  "Total: {{total}}": "Totaal: {{total}}"
 }

@@ -27,5 +27,5 @@
   "Data Loaded: {{date}}": "数据已加载:{{date}}",
   "Export Table to CSV": "将表格导出为 CSV",
   "Corporation": "军团",
-  "Alliance": "联盟"
+  "Total: {{total}}": "总计:{{total}}"
 }

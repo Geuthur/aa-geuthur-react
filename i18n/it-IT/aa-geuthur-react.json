@@ -26,5 +26,5 @@
   "Refreshing Data": "Aggiornamento dati",
   "Data Loaded: {{date}}": "Dati caricati: {{date}}",
   "Export Table to CSV": "Esporta tabella in CSV",
-  "Alliance": "Alleanza"
+  "Total: {{total}}": "Totale: {{total}}"
 }

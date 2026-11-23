@@ -28,6 +28,5 @@
   "Refreshing Data": "Actualizando datos",
   "Data Loaded: {{date}}": "Datos cargados: {{date}}",
   "Export Table to CSV": "Exportar tabla a CSV",
-  "Corporation": "Corporación",
-  "Alliance": "Alianza"
+  "Corporation": "Corporación"
 }

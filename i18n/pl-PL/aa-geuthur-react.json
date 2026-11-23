@@ -28,5 +28,5 @@
   "Data Loaded: {{date}}": "Dane załadowane: {{date}}",
   "Export Table to CSV": "Eksportuj tabelę do CSV",
   "Corporation": "Korporacja",
-  "Alliance": "Sojusz"
+  "Total: {{total}}": "Łącznie: {{total}}"
 }
