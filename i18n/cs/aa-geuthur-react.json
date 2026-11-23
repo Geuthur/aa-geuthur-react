@@ -27,5 +27,5 @@
   "Data Loaded: {{date}}": "Data načtena: {{date}}",
   "Export Table to CSV": "Exportovat tabulku do CSV",
   "Corporation": "Korporace",
-  "Alliance": "Aliance"
+  "Total: {{total}}": "Celkem: {{total}}"
 }

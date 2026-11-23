@@ -27,5 +27,5 @@
   "Data Loaded: {{date}}": "데이터 로드됨: {{date}}",
   "Export Table to CSV": "표를 CSV로 내보내기",
   "Corporation": "코퍼레이션",
-  "Alliance": "얼라이언스"
+  "Total: {{total}}": "합계: {{total}}"
 }

@@ -27,5 +27,5 @@
   "Data Loaded: {{date}}": "データ読み込み: {{date}}",
   "Export Table to CSV": "テーブルをCSVにエクスポート",
   "Corporation": "コーポレーション",
-  "Alliance": "アライアンス"
+  "Total: {{total}}": "合計: {{total}}"
 }
